@@ -1,0 +1,28 @@
+{% extends "teases/tease.twig" %}
+
+{% block content %}
+    <article class="post-full experience">
+        <header class="post-header">
+            <h3 class="post-box-title">{{post.get_field('_experience_business_name')}}</h3>
+            <ul class="post-box-meta">
+                <li>
+                    <i class="fa fa-calendar"></i> {{post.get_field('_experience_start_date')}} - {{post.get_field('_experience_end_date')}}
+                </li>
+                <li>
+                    <i class="fa fa-wrench"></i> {{post.get_field('_experience_role')}}
+                </li>
+                <li>
+                    <i class="fa fa-map-marker"></i> {{post.get_field('_experience_location')}}
+                </li>
+            </ul>
+        </header>
+        {% if post.thumbnail.src %}
+        <figure class="post-image-holder">
+            <img src="{{post.thumbnail.src}}" />
+        </figure>
+        {% endif %}
+        <div class="post-content">
+            {{post.get_content}}
+        </div>
+    </article>
+{% endblock %}

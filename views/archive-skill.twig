@@ -1,0 +1,21 @@
+{% extends "page.twig" %}
+
+{% block content %}
+<article class="elr-container-full">
+    <h1 class="page-title">Skills</h1>
+    <div class="skills-holder" style="padding-bottom: 40px">
+        {% for skill in skills %}
+            <div class="skill-link smooth-scroll" >
+                <a href="#{{skill.slug}}">{{skill.title}}</a>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="skills-content-holder">
+        {% for skill in skills %}
+            <div class="skill">
+                {% include 'teases/tease-skill.twig' with {'post': skill} %}
+            </div>
+        {% endfor %}
+    </div>
+</article>
+{% endblock %}

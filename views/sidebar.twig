@@ -1,0 +1,16 @@
+<aside class="sidebar">
+    <div class="shadow-box personal-info-box">
+        {% if logo %}
+        <figure class="personal-info-avatar">
+            <img src="{{logo}}" alt="">
+        </figure>
+        {% endif %}
+        <div class="personal-info">
+            <h3 class="personal-info-name">{{general.name}}</h3>
+            <h4 class="personal-info-role">{{general.role}}</h4>
+            <h4 class="personal-info-location">{{general.location}}</h4>
+        </div>
+        <a href="/contact" class="elr-button elr-button-primary">Contact</a>
+    </div>
+    {# add widgets #}
+</aside>

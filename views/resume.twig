@@ -1,0 +1,40 @@
+{% extends "page.twig" %}
+
+{% block page %}
+    <div class="background shadow-box">
+        <h2 id="background" class="box-heading">Resumé</h2>
+        {% if summary %}
+        <div class="background-section">
+            <h3 class="background-section-title">Summary</h3>
+            {{summary}}
+        </div>
+        {% endif %}
+        {% if experiences %}
+        <div class="background-section">
+            <h3 class="background-section-title" id="experience">Experience</h3>
+            {% for experience in experiences %}
+                {% include 'teases/tease-experience.twig' with {'post': experience} %}
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% if educations %}
+        <div class="background-section">
+            <h3 class="background-section-title" id="education">Education</h3>
+            {% for education in educations %}
+                {% include 'teases/tease-education.twig' with {'post': education} %}
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% if skills %}
+        <div class="background-section">
+            <h3 class="background-section-title" id="skills">Skills</h3>
+            <div class="skills-holder">
+                {% for skill in skills %}
+                    {# <a class="skill-link" href="{{skill.link}}">{{skill.title}}</a> #}
+                    <p class="skill-link">{{skill.title}}</p>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+{% endblock %}

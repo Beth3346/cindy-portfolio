@@ -1,0 +1,41 @@
+language: php
+sudo: false
+dist: trusty
+php:
+- 7.1
+- 7.0
+- 5.6
+- nightly
+env:
+- TRAVIS_NODE_VERSION="6"
+- TRAVIS_NODE_VERSION="7"
+matrix:
+  fast_finish: true
+  allow_failures:
+  - php: nightly
+cache:
+  apt: true
+  directories:
+  - "$HOME/.composer/cache"
+  - "$HOME/.yarn-cache"
+  - vendor
+before_install:
+- composer self-update
+- gem install scss-lint
+- source ~/.nvm/nvm.sh && nvm install $TRAVIS_NODE_VERSION && nvm use $TRAVIS_NODE_VERSION
+- export PATH=$HOME/.yarn/bin:$PATH && travis_retry curl -o- -L https://yarnpkg.com/install.sh
+  | bash
+install:
+- node -v && yarn -V
+- travis_retry yarn
+- composer install -o --prefer-dist --no-interaction
+- gem install sass
+- gem install scss-lint
+- npm install
+- npm install -g gulp
+script:
+- gulp build
+- composer test
+notifications:
+  slack:
+    secure: Gzd3LnW0ZO69gJLB/oqazCYxOxg6hdFAy5PYdRMPw2j/rSRf4a1s0B64OrYl8nn+bcmftVs90NjxoLtdwa58K/8884RJYYiB8KnTLtZ5MGZDjDu0byfiCUw4oYPGeR5HnZWTGrB9nGKXgIjLtJovmJ2v1XlQtEUr8Mpq1CNQtIVeTtXKGYzp+XVay7LkxO4XKXOH+TbS0P1duFfzm3bEWutvDc1IFJ4Bae76cBS/remwSpGvncYt+ZFk3A+GtRJU5RbIZDBmoEkxRBVDUOxESUu+FW7JJq7Nirhh9rHWaBZ0V7xF9FOXktzVmzZgQD/Ti6mZAkS3pdU98K5GNOQcXEg9DJjJY3vON8FJAdxHk1xkGM9XrKx1hhIXjUNIwaabRF9JKynQfxWHtf5bl8Z3b4sdxwWD22jz9nGYVmOUi6RotWpDNjpHzWe4m9bVRKYprln2mNZ1yAm685nx3vAiTLa1d7PQEgfU1krPv6EZULeq04Nbjlyv15JSK2kJ8Yp20sGheH4HpX8QgF0Du7XDONYteIfMotTEHf65vcG2aqTL13CJNtgQbxAqlB4YfAVVPhb/uu1MWMALk+kIVjcjRkaTF0Ez6Vsu7jayW6ssPtFtoNRs9C/toErUOU0TfDPoWD1tbs1/KcXdrPwq+Y1Vg+bPWeKLxmcsHgNM/RgTSEo=
