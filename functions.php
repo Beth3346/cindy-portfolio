@@ -484,7 +484,7 @@ class Site extends \TimberSite
             ]
         ];
 
-        $settings->initializeThemeSettings($options);
+        // $settings->initializeThemeSettings($options);
     }
 }
 
